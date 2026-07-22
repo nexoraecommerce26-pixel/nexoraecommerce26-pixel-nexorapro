@@ -1,8 +1,8 @@
 import { createClient } from "@supabase/supabase-js";
 
 // ─── Initialize Real Supabase Client ─────────────────────────────────────────
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.NEXT_PUBLIC_PROJECT_URL || process.env.SUPABASE_URL || process.env.PROJECT_URL || "";
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_PROJECT_ANON_KEY || process.env.SUPABASE_ANON_KEY || process.env.PROJECT_ANON_KEY || "";
 
 function createMockSupabase(): any {
   const dummyBuilder: any = {

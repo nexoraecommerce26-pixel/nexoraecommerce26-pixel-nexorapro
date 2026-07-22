@@ -28,8 +28,8 @@ export default function ThemePage() {
   const [loading, setLoading] = useState(true)
 
   const getSupabase = async () => {
-    const { createClient } = await import('@supabase/supabase-js')
-    return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
+    const { supabase } = await import('@/app/lib/supabase')
+    return supabase
   }
 
   useEffect(() => {

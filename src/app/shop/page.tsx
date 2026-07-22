@@ -34,8 +34,7 @@ export default function ShopPage({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     const load = async () => {
-      const { createClient } = await import('@supabase/supabase-js')
-      const sb = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
+      const { supabase: sb } = await import('@/app/lib/supabase')
       const { data: shopData } = await sb.from('shops').select('*').eq('id', params.id).single()
       const { data: productsData } = await sb.from('products').select('*').eq('shop_id', params.id).eq('is_available', true)
       const { data: offersData } = await sb.from('offers').select('*').eq('shop_id', params.id)
@@ -63,8 +62,7 @@ export default function ShopPage({ params }: { params: { id: string } }) {
     if (!orderForm.name||!orderForm.phone||!orderForm.address) return
     setPlacing(true)
     try {
-      const { createClient } = await import('@supabase/supabase-js')
-      const sb = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
+      const { supabase: sb } = await import('@/app/lib/supabase')
       const costTotal = cart.reduce((s,i) => s+(i.cost_price||0)*i.qty, 0)
       const { data: order, error } = await sb.from('orders').insert({
         shop_id: shop.id,
