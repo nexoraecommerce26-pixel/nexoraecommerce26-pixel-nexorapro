@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 
 // ─── Initialize Real Supabase Client ─────────────────────────────────────────
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://hbnlxzcmbkinzkitrlps.supabase.co";
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
 
 function createMockSupabase(): any {
@@ -23,10 +23,10 @@ function createMockSupabase(): any {
       getUser: async () => ({ data: { user: null }, error: null }),
       getSession: async () => ({ data: { session: null }, error: null }),
       onAuthStateChange: () => ({ data: { subscription: { unsubscribe: () => {} } } }),
-      signInWithPassword: async () => ({ data: { user: null }, error: new Error("Authentication failed. Please verify your credentials or configuration.") }),
-      signUp: async () => ({ data: { user: null }, error: new Error("Authentication failed. Please verify your credentials or configuration.") }),
+      signInWithPassword: async () => ({ data: { user: null }, error: new Error("Supabase is not configured. Please define NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in your Vercel Environment Variables.") }),
+      signUp: async () => ({ data: { user: null }, error: new Error("Supabase is not configured. Please define NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in your Vercel Environment Variables.") }),
       signOut: async () => ({ error: null }),
-      signInWithOAuth: async () => ({ data: null, error: new Error("OAuth authentication failed. Please verify your credentials or configuration.") }),
+      signInWithOAuth: async () => ({ data: null, error: new Error("Supabase is not configured. Please define NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in your Vercel Environment Variables.") }),
     }
   };
 }
