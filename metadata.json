@@ -1,0 +1,8 @@
+{
+  "name": "Nexora Digital Mall",
+  "description": "Multi-vendor digital mall platform for local businesses in Bangladesh",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

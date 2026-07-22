@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --orange: #FF5C1A;
+  --orange-light: #FF8C5A;
+  --orange-deep: #C43A08;
+  --orange-tint: #FFE8DC;
+  --cream: #F7F4F0;
+  --dark: #1A1A1A;
+  --gray: #6B6B6B;
+  --gray-light: #E5E5E5;
+  --success: #18A558;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --color-orange: var(--orange);
+  --color-orange-light: var(--orange-light);
+  --color-orange-deep: var(--orange-deep);
+  --color-orange-tint: var(--orange-tint);
+  --color-cream: var(--cream);
+  --color-dark: var(--dark);
+  --color-ngray: var(--gray);
+  --color-ngray-light: var(--gray-light);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.animate-blink {
+  animation: blink 1.8s infinite;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Horizontal scroll hide scrollbar */
+.scroll-hide::-webkit-scrollbar {
+  height: 3px;
+}
+.scroll-hide::-webkit-scrollbar-thumb {
+  background: var(--gray-light);
+  border-radius: 4px;
+}
