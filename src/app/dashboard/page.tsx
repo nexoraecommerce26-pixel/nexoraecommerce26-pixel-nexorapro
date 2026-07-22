@@ -1067,9 +1067,11 @@ export default function DashboardPage() {
           .eq("id", formData.id);
         if (error) throw error;
       } else {
+        const prodId = typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID() : `prod_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
         const { error } = await supabase
           .from("products")
           .insert({
+            id: prodId,
             shop_id: shop.id,
             name: formData.name,
             description: formData.description,

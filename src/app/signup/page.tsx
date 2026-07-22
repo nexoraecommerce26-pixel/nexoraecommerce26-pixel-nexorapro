@@ -176,7 +176,9 @@ export default function SellerSignupPage() {
       if (roleError) throw roleError;
 
       // 4. Submit pending confirmation for admin review
+      const pendingId = typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID() : `pc_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
       const { error: pendingError } = await supabase.from("pending_confirmations").insert({
+        id: pendingId,
         shop_name: shopName,
         owner_name: fullName,
         phone,

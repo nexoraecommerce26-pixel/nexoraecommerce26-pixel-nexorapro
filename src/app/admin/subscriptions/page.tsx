@@ -55,7 +55,9 @@ export default function SubscriptionFormPage() {
     setError(null);
     try {
       // Insert subscription
+      const subId = typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID() : `sub_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
       const { error: subError } = await supabase.from("subscriptions").insert({
+        id: subId,
         shop_id: shopId,
         package: pkg,
         amount_paid: parseFloat(amountPaid),

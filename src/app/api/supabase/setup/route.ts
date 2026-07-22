@@ -19,7 +19,7 @@ const TABLES_DDL = [
     name: "user_roles",
     sql: `
       CREATE TABLE IF NOT EXISTS user_roles (
-        id VARCHAR(255) PRIMARY KEY,
+        id VARCHAR(255) PRIMARY KEY DEFAULT gen_random_uuid()::text,
         role VARCHAR(255) NOT NULL
       );
     `
@@ -28,7 +28,7 @@ const TABLES_DDL = [
     name: "shops",
     sql: `
       CREATE TABLE IF NOT EXISTS shops (
-        id VARCHAR(255) PRIMARY KEY,
+        id VARCHAR(255) PRIMARY KEY DEFAULT gen_random_uuid()::text,
         seller_id VARCHAR(255) NOT NULL,
         shop_name VARCHAR(255) NOT NULL,
         slug VARCHAR(255) NOT NULL,
@@ -50,7 +50,7 @@ const TABLES_DDL = [
     name: "categories",
     sql: `
       CREATE TABLE IF NOT EXISTS categories (
-        id VARCHAR(255) PRIMARY KEY,
+        id VARCHAR(255) PRIMARY KEY DEFAULT gen_random_uuid()::text,
         name VARCHAR(255) NOT NULL,
         slug VARCHAR(255) NOT NULL,
         image_url VARCHAR(1000)
@@ -61,7 +61,7 @@ const TABLES_DDL = [
     name: "products",
     sql: `
       CREATE TABLE IF NOT EXISTS products (
-        id VARCHAR(255) PRIMARY KEY,
+        id VARCHAR(255) PRIMARY KEY DEFAULT gen_random_uuid()::text,
         shop_id VARCHAR(255) NOT NULL,
         name VARCHAR(255) NOT NULL,
         description TEXT,
@@ -80,7 +80,7 @@ const TABLES_DDL = [
     name: "orders",
     sql: `
       CREATE TABLE IF NOT EXISTS orders (
-        id VARCHAR(255) PRIMARY KEY,
+        id VARCHAR(255) PRIMARY KEY DEFAULT gen_random_uuid()::text,
         shop_id VARCHAR(255) NOT NULL,
         buyer_id VARCHAR(255),
         customer_name VARCHAR(255) NOT NULL,
@@ -99,7 +99,7 @@ const TABLES_DDL = [
     name: "buyers",
     sql: `
       CREATE TABLE IF NOT EXISTS buyers (
-        id VARCHAR(255) PRIMARY KEY,
+        id VARCHAR(255) PRIMARY KEY DEFAULT gen_random_uuid()::text,
         name VARCHAR(255) NOT NULL,
         phone VARCHAR(255) NOT NULL,
         email VARCHAR(255),
@@ -112,7 +112,7 @@ const TABLES_DDL = [
     name: "sellers",
     sql: `
       CREATE TABLE IF NOT EXISTS sellers (
-        id VARCHAR(255) PRIMARY KEY,
+        id VARCHAR(255) PRIMARY KEY DEFAULT gen_random_uuid()::text,
         full_name VARCHAR(255) NOT NULL,
         phone VARCHAR(255) NOT NULL,
         email VARCHAR(255),
@@ -124,7 +124,7 @@ const TABLES_DDL = [
     name: "subscriptions",
     sql: `
       CREATE TABLE IF NOT EXISTS subscriptions (
-        id VARCHAR(255) PRIMARY KEY,
+        id VARCHAR(255) PRIMARY KEY DEFAULT gen_random_uuid()::text,
         shop_id VARCHAR(255) NOT NULL,
         package VARCHAR(255) NOT NULL,
         amount_paid INTEGER NOT NULL,
@@ -139,7 +139,7 @@ const TABLES_DDL = [
     name: "pending_confirmations",
     sql: `
       CREATE TABLE IF NOT EXISTS pending_confirmations (
-        id VARCHAR(255) PRIMARY KEY,
+        id VARCHAR(255) PRIMARY KEY DEFAULT gen_random_uuid()::text,
         shop_name VARCHAR(255) NOT NULL,
         owner_name VARCHAR(255) NOT NULL,
         phone VARCHAR(255) NOT NULL,

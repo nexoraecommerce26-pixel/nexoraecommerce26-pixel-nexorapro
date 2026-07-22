@@ -54,7 +54,9 @@ export default function PendingConfirmationsPage() {
       // 2. Create the shop for this seller
       if (row.seller_user_id) {
         const slug = row.shop_name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+        const shopId = typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID() : `shop_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
         const { error: shopError } = await supabase.from("shops").insert({
+          id: shopId,
           seller_id: row.seller_user_id,
           shop_name: row.shop_name,
           slug,
@@ -75,7 +77,9 @@ export default function PendingConfirmationsPage() {
           .single();
 
         if (shopData) {
+          const subId = typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID() : `sub_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
           await supabase.from("subscriptions").insert({
+            id: subId,
             shop_id: shopData.id,
             package: row.package,
             amount_paid: row.amount_paid,

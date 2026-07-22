@@ -64,7 +64,9 @@ export default function ShopPage({ params }: { params: { id: string } }) {
     try {
       const { supabase: sb } = await import('@/app/lib/supabase')
       const costTotal = cart.reduce((s,i) => s+(i.cost_price||0)*i.qty, 0)
-      const { data: order, error } = await sb.from('orders').insert({
+      const orderId = typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID() : `ord_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+      const { data: orderData, error } = await sb.from('orders').insert({
+        id: orderId,
         shop_id: shop.id,
         customer_name: orderForm.name,
         customer_phone: orderForm.phone,
@@ -76,8 +78,15 @@ export default function ShopPage({ params }: { params: { id: string } }) {
         payment_status: orderForm.payment==='cod'?'unpaid':'unpaid',
       }).select().single()
       if (error) throw error
+      const actualOrderId = orderData?.id || orderId
       // Insert order items
-      await sb.from('order_items').insert(cart.map(i => ({ order_id:order.id, product_id:i.id, quantity:i.qty, unit_price:i.selling_price||i.price })))
+      await sb.from('order_items').insert(cart.map(i => ({
+        id: typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID() : `item_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`,
+        order_id: actualOrderId,
+        product_id: i.id,
+        quantity: i.qty,
+        unit_price: i.selling_price || i.price
+      })))
       setOrderPlaced(true)
       setCart([])
     } catch(e){ console.error(e) } finally { setPlacing(false) }

@@ -95,7 +95,9 @@ export default function CategoriesAdminPage() {
         const nextOrder = categories.length
           ? Math.max(...categories.map((c) => c.sort_order)) + 1
           : 1;
+        const catId = typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID() : `cat_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
         const { error } = await supabase.from("categories").insert({
+          id: catId,
           name,
           slug: slugify(name),
           image_url,
